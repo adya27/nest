@@ -1,10 +1,29 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { Module } from "@nestjs/common";
+import { AppController } from "./app.controller";
+import { AppService } from "./app.service";
+import { UserModule } from "./user/user.module";
+import { SequelizeModule } from "@nestjs/sequelize";
+import { ConfigModule } from "@nestjs/config";
 
 @Module({
-  imports: [],
+  imports: [
+    ConfigModule.forRoot({
+      envFilePath: `.${process.env.NODE_ENV}.env`,
+      isGlobal: true,
+    }),
+    UserModule,
+    SequelizeModule.forRoot({
+      dialect: "postgres",
+      host: process.env.POSTGRES_HOST,
+      port: parseInt(process.env.POSTGRES_PORT, 10),
+      username:  process.env.POSTGRES_USER,
+      password:  process.env.POSTGRES_PASSWORD,
+      database:  process.env.POSTGRES_DB,
+      models: []
+    })
+  ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService]
 })
-export class AppModule {}
+export class AppModule {
+}
