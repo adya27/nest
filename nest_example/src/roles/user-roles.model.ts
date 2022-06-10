@@ -15,7 +15,7 @@ export class UserRoles extends Model<UserRoles> {
   roleId: number;
 
   @ForeignKey(() => User)
-  @ApiProperty({ example: "Have all rights", description: "User role description" })
+  @ApiProperty({ example: "examle@mail.com", description: "User description" })
   @Column({ type: DataType.INTEGER })
   userId: number;
 }
