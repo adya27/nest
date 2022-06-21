@@ -8,6 +8,6 @@ export class CreateUserDto {
   readonly email: string;
   @ApiProperty({ example: "12345", description: "User password" })
   @IsString({ message: "Should be a string" })
-  @Length(4, 16, { message: "Should be longer than 4 symbols" })
+  @Length(4, 16, { message: "Should be longer than 4 symbols and shorter than 16" })
   readonly password: string;
 }
